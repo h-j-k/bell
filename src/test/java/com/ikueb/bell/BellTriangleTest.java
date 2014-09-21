@@ -27,13 +27,13 @@ public class BellTriangleTest {
     private static final String EXCEPTIONS = "exception-test-cases";
 
     private static enum TestCase {
-        ZERO(0, 1), ONE(1, 1), TWO(2, 2), THREE(3, 5), FOUR(4, 15), FIVE(5, 52), SIX(6, 203);
+        ZERO(1), ONE(1), TWO(2), THREE(5), FOUR(15), FIVE(52), SIX(203), SEVEN(877), EIGHT(4140);
 
         private final Integer index;
         private final Long result;
 
-        TestCase(int index, long result) {
-            this.index = Integer.valueOf(index);
+        TestCase(long result) {
+            this.index = Integer.valueOf(ordinal());
             this.result = Long.valueOf(result);
         }
     }
