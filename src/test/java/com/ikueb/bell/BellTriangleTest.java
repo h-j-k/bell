@@ -50,6 +50,17 @@ public class BellTriangleTest {
         }
     }
 
+    /**
+     * Displays a {@link BellTriangle} using a left-aligned format.
+     *
+     * @param bellTriangle the {@link BellTriangle} to display.
+     */
+    private static final void displayTriangle(final BellTriangle bellTriangle) {
+        Arrays.stream(bellTriangle.getTriangle())
+                .map((row) -> Arrays.stream(row).boxed().map(Object::toString)
+                        .collect(Collectors.joining(", "))).forEach(log::debug);
+    }
+
     @DataProvider(name = STANDARD)
     public Iterator<Object[]> getTestCases() {
         return Stream.of(TestCase.values())
@@ -98,17 +109,6 @@ public class BellTriangleTest {
                 displayTriangle(new BellTriangle(input));
             }
         }
-    }
-
-    /**
-     * Displays a {@link BellTriangle} using a left-aligned format.
-     *
-     * @param bellTriangle the {@link BellTriangle} to display.
-     */
-    private static final void displayTriangle(final BellTriangle bellTriangle) {
-        Arrays.stream(bellTriangle.getTriangle())
-                .map((row) -> Arrays.stream(row).boxed().map(Object::toString)
-                        .collect(Collectors.joining(", "))).forEach(log::debug);
     }
 
 }

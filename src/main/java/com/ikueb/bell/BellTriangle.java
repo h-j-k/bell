@@ -1,6 +1,5 @@
 package com.ikueb.bell;
 
-
 /**
  * Computes a Bell Triangle.
  * <p>
