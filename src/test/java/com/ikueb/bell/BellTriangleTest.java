@@ -69,10 +69,18 @@ public class BellTriangleTest {
 
     @Test(dataProvider = STANDARD)
     public void testGetSizeResultAndValue(Integer index, Long expected) {
-        final BellTriangle bellTriangle = new BellTriangle(index.intValue());
+        final int size = index.intValue();
+        final BellTriangle bellTriangle = new BellTriangle(size);
         assertThat(Integer.valueOf(bellTriangle.getSize()), equalTo(index));
         assertThat(Long.valueOf(bellTriangle.getBellNumber()), equalTo(expected));
-        assertThat(Long.valueOf(bellTriangle.getValue(index.intValue(), 0)), equalTo(expected));
+        assertThat(Long.valueOf(bellTriangle.getValue(size, 0)), equalTo(expected));
+        if (size == 0) {
+            displayTriangle(bellTriangle);
+            return;
+        }
+        assertThat(Long.valueOf(bellTriangle.getValue(size - 1, size - 1)), equalTo(expected));
+        final long nextValue = (bellTriangle.getValue(size - 1, 0) + bellTriangle.getBellNumber());
+        assertThat(Long.valueOf(bellTriangle.getValue(size, 1)), equalTo(Long.valueOf(nextValue)));
         displayTriangle(bellTriangle);
     }
 
