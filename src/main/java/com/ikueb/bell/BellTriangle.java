@@ -107,11 +107,11 @@ public class BellTriangle implements Cloneable {
      */
     public final long[][] getTriangle() {
         long[][] result = new long[triangle.length][];
-        int i = 0;
-        for (long[] row : triangle) {
+        for (int i = 0; i < triangle.length; i++) {
+            long[] row = triangle[i];
             long[] newRow = new long[row.length];
             System.arraycopy(row, 0, newRow, 0, row.length);
-            result[i++] = newRow;
+            result[i] = newRow;
         }
         return result;
     }
