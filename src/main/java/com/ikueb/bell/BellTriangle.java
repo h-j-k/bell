@@ -40,18 +40,18 @@ public class BellTriangle implements Cloneable {
      * @return a two-dimension jagged array representing the computed triangle.
      * @see BellTriangle#LIMIT
      */
-    private long[][] compute(int n) {
+    private static long[][] compute(int n) {
         if (n < 0 || n > LIMIT) {
             throw new IllegalArgumentException("Input must be between 0 and " + LIMIT
                     + ", inclusive.");
         }
-        final long[][] result = new long[++n][];
+        final long[][] result = new long[n + 1][];
         result[0] = ROW_ZERO;
-        for (int i = 1; i < n; i++) {
+        for (int i = 1; i <= n; i++) {
             result[i] = new long[i + 1];
             result[i][0] = result[i - 1][i - 1];
             for (int j = 0; j < i; j++) {
-                result[i][j + 1] = result[--i][j] + result[++i][j];
+                result[i][j + 1] = result[i - 1][j] + result[i][j];
             }
         }
         return result;
@@ -88,12 +88,13 @@ public class BellTriangle implements Cloneable {
      */
     public final long getValue(int row, int field) {
         if (row < 0 || field < 0) {
-            throw new IllegalArgumentException("Both indices must be greater than 0.");
+            throw new IllegalArgumentException("Both indices must not be less than 0.");
         }
         if (row > getSize()) {
-            throw new IllegalArgumentException("Row index must be " + getSize() + " or less.");
+            throw new IllegalArgumentException("Row index must not be greater than " + getSize()
+                    + ".");
         }
-        if (row < field) {
+        if (field > row) {
             throw new IllegalArgumentException("Field index must not be greater than row index.");
         }
         return triangle[row][field];
