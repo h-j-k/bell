@@ -7,7 +7,7 @@ package com.ikueb.bell;
  * element is the largest singleton. It is named for its close connection to the Bell numbers, which
  * may be found on both sides of the triangle.
  */
-public class BellTriangle implements Cloneable {
+public final class BellTriangle implements Cloneable {
 
     public static final int LIMIT = 24;
     private static final long[] ROW_ZERO = new long[] { 1 };
@@ -62,7 +62,7 @@ public class BellTriangle implements Cloneable {
      *
      * @return the triangle's size.
      */
-    public final int getSize() {
+    public int getSize() {
         return triangle.length - 1;
     }
 
@@ -71,7 +71,7 @@ public class BellTriangle implements Cloneable {
      *
      * @return the Bell Number.
      */
-    public final long getBellNumber() {
+    public long getBellNumber() {
         return triangle[getSize()][0];
     }
 
@@ -86,7 +86,7 @@ public class BellTriangle implements Cloneable {
      * @param field the field to return.
      * @return the value for the specified <code>row</code> and <code>field</code>.
      */
-    public final long getValue(int row, int field) {
+    public long getValue(int row, int field) {
         if (row < 0 || field < 0) {
             throw new IllegalArgumentException("Both indices must not be less than 0.");
         }
@@ -105,7 +105,7 @@ public class BellTriangle implements Cloneable {
      *
      * @return a copy of the <code>triangle</code>.
      */
-    public final long[][] getTriangle() {
+    public long[][] getTriangle() {
         long[][] result = new long[triangle.length][];
         for (int i = 0; i < triangle.length; i++) {
             long[] row = triangle[i];
@@ -117,17 +117,17 @@ public class BellTriangle implements Cloneable {
     }
 
     @Override
-    public final BellTriangle clone() {
+    public BellTriangle clone() {
         return new BellTriangle(getSize());
     }
 
     @Override
-    public final boolean equals(Object o) {
+    public boolean equals(Object o) {
         return o instanceof BellTriangle && ((BellTriangle) o).getSize() == getSize();
     }
 
     @Override
-    public final int hashCode() {
+    public int hashCode() {
         return getSize();
     }
 
