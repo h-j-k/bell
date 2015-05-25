@@ -1,8 +1,6 @@
-bell
-====
+# bell
 
-Bell Triangle computation
+A simple project on [Bell number][1] and [Bell triangle][2] computations.
 
-http://en.wikipedia.org/wiki/Bell_number
-
-http://en.wikipedia.org/wiki/Bell_triangle
+[1]: http://en.wikipedia.org/wiki/Bell_number
+[2]: http://en.wikipedia.org/wiki/Bell_triangle
