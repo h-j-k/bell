@@ -19,11 +19,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,19 +41,17 @@ public class BellTriangleTest {
     private static final String STANDARD = "test-cases";
     private static final String EXCEPTIONS = "exception-test-cases";
 
-    private static enum TestCase {
+    enum TestCase {
         ZERO(1), ONE(1), TWO(2), THREE(5), FOUR(15), FIVE(52), SIX(203), SEVEN(877), EIGHT(4140);
 
-        private final Integer index;
         private final Long result;
 
         TestCase(long result) {
-            this.index = Integer.valueOf(ordinal());
             this.result = Long.valueOf(result);
         }
     }
 
-    private static enum ExceptionTestCase {
+    enum ExceptionTestCase {
         NEG_ROW(-1, 0), NEG_FIELD(0, -1), BAD_ROW(SIZE + 1, 0), BAD_FIELD(0, SIZE + 1);
 
         private final Integer row;
@@ -72,14 +70,15 @@ public class BellTriangleTest {
      */
     private static final void displayTriangle(final BellTriangle bellTriangle) {
         Arrays.stream(bellTriangle.getTriangle())
-                .map((row) -> Arrays.stream(row).boxed().map(Object::toString)
+                .map(row -> Arrays.stream(row).mapToObj(Long::toString)
                         .collect(Collectors.joining(", "))).forEach(log::debug);
     }
 
     @DataProvider(name = STANDARD)
-    public Iterator<Object[]> getTestCases() {
-        return Stream.of(TestCase.values())
-                .map((current) -> new Object[] { current.index, current.result }).iterator();
+    public static Iterator<Object[]> getTestCases() {
+        return EnumSet.allOf(TestCase.class).stream()
+                .map(v -> new Object[] { Integer.valueOf(v.ordinal()), v.result })
+                .iterator();
     }
 
     @Test(dataProvider = STANDARD)
@@ -100,9 +99,9 @@ public class BellTriangleTest {
     }
 
     @DataProvider(name = EXCEPTIONS)
-    public Iterator<Object[]> getExceptionTestCases() {
-        return Stream.of(ExceptionTestCase.values())
-                .map((current) -> new Object[] { current.row, current.field }).iterator();
+    public static Iterator<Object[]> getExceptionTestCases() {
+        return EnumSet.allOf(ExceptionTestCase.class).stream()
+                .map(v -> new Object[] { v.row, v.field }).iterator();
     }
 
     @Test(dataProvider = EXCEPTIONS, expectedExceptions = IllegalArgumentException.class)
@@ -117,7 +116,7 @@ public class BellTriangleTest {
     }
 
     @Test
-    public void testTriangles() {
+    public void testCloning() {
         assertThat("Matching objects", Objects.equals(TEST, TEST.clone()));
         assertThat("Matching objects' hash codes", TEST.hashCode() == TEST.clone().hashCode());
         assertThat("Different objects' references", TEST != TEST.clone());

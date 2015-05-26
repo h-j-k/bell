@@ -29,9 +29,9 @@ public final class BellTriangle implements Cloneable {
     private final long[][] triangle;
 
     /**
-     * Computes a triangle up to the number of rows, <code>n</code>.
+     * Computes a triangle up to the number of rows, {@code n}.
      *
-     * @param n the number of rows, excluding <code>row 0</code>, to compute.
+     * @param n the number of rows, excluding {@code row 0}, to compute.
      * @see #compute(int)
      */
     public BellTriangle(int n) {
@@ -39,19 +39,19 @@ public final class BellTriangle implements Cloneable {
     }
 
     /**
-     * Compute the triangle up to the number of rows, <code>n</code>.
+     * Compute the triangle up to the number of rows, {@code n}.
      * <p>
-     * The smallest Bell Triangle contains a single-field row, <code>row 0</code>, with the value 1
-     * representing the number of partitions for an <em>empty</em> set. Therefore, in computing the
-     * triangle for a set of <code>n</code> elements, the resulting array has <code>n + 1</code>
-     * rows. Row indices run from 0 to <code>n</code>, inclusive. Field indices also run in the same
-     * range. The Bell Number of the triangle is simply the first array value of the
-     * <code>n-th</code> row.
+     * The smallest Bell Triangle contains a single-field row, {@code 0}, with the value
+     * 1 representing the number of partitions for an <em>empty</em> set. Therefore, in
+     * computing the triangle for a set of {@code n} elements, the resulting array has
+     * {@code n + 1} rows. Row indices run from 0 to {@code n}, inclusive. Field indices
+     * also run in the same range. The Bell Number of the triangle is simply the first
+     * array value of the {@code n-th} row.
      * <p>
-     * Due to maximum value of the <code>long</code> datatype, <code>n</code> must not be greater
+     * Due to maximum value of the {@code long} datatype, {@code n} must not be greater
      * than {@link BellTriangle#LIMIT}.
      *
-     * @param n the number of rows, excluding <code>row 0</code>, to compute.
+     * @param n the number of rows, excluding {@code row 0}, to compute.
      * @return a two-dimension jagged array representing the computed triangle.
      * @see BellTriangle#LIMIT
      */
@@ -73,7 +73,8 @@ public final class BellTriangle implements Cloneable {
     }
 
     /**
-     * Gets the size of the triangle, i.e. the value of <code>n</code> used in the constructor.
+     * Gets the size of the triangle, i.e. the value of {@code n} used in the
+     * constructor.
      *
      * @return the triangle's size.
      */
@@ -91,11 +92,10 @@ public final class BellTriangle implements Cloneable {
     }
 
     /**
-     * Given a positive <code>row</code> and <code>field</code>, return the value within the
-     * triangle. Both indices start from zero.
+     * Given a positive {@code row} and {@code field}, return the value within the
+     * triangle. Both indices are 0-based.
      * <p>
-     * <code>row</code> must be equal to or less than the triangle's size, and <code>field</code>
-     * must also be equal to or less than <code>row</code>.
+     * {@code 0 <= field <= row <= triangle size}
      *
      * @param row the row to seek.
      * @param field the field to return.
@@ -116,9 +116,9 @@ public final class BellTriangle implements Cloneable {
     }
 
     /**
-     * Copies the <code>triangle</code>.
+     * Copies the {@code triangle}.
      *
-     * @return a copy of the <code>triangle</code>.
+     * @return a copy of the {@code triangle}.
      */
     public long[][] getTriangle() {
         long[][] result = new long[triangle.length][];
